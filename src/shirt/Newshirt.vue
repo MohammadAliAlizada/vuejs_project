@@ -1,11 +1,11 @@
 <template>
   <div>
-    <b-btn v-b-modal.modalPrevent size="sm" variant="primary" @click="coatMapping"><i class="plus icon" style="margin-left:5px;"></i>کرتی جدید</b-btn>
+    <b-btn v-b-modal.modalPrevent size="sm" variant="primary" @click="shirtMapping"><i class="plus icon" style="margin-left:5px;"></i>یخن قاق جدید</b-btn>
     <b-modal 
          
            id="modalPrevent"
              ref="modal"
-             title=" کرتی جدید "
+             title=" واسکت جدید "
              :width=300
              @ok="handleOk"
              centered 
@@ -25,19 +25,19 @@
             <div class="fields">
                 <div class="field">
                 <label>قد</label>
-                <input type="text"  v-model="coat.coat_length">
-                <p class="er"><span>  {{errors.get('coat_length')}}</span></p>
+                <input type="text"  v-model="shirt.shirt_length">
+                <p class="er"><span>  {{errors.get('shirt_length')}}</span></p>
                 </div>
                 <div class="field">
                 <label>شانه</label>
-                <input type="text" v-model="coat.coat_shoulder">
-                 <p class="er"><span>  {{errors.get('coat_shoulder')}}</span></p>
+                <input type="text" v-model="shirt.shirt_shoulder">
+                 <p class="er"><span>  {{errors.get('shirt_shoulder')}}</span></p>
                 </div>
 
                 <div class="field">
-                <label>بغل</label>
-                <input type="text" v-model="coat.chest">
-                <p class="er"><span>  {{errors.get('chest')}}</span></p>
+                <label>آستین</label>
+                <input type="text" v-model="shirt.sleeve">
+                <p class="er"><span>  {{errors.get('sleev')}}</span></p>
                 </div>
                 </div>
             </div>
@@ -48,19 +48,19 @@
                     <div class="ui mini width form">
                <div class="fields">
                     <div class="field">
+                    <label>بغل</label>
+                    <input type="text"  v-model="shirt.chest">
+                    <p class="er"><span>  {{errors.get('chest')}}</span></p>
+                    </div>
+                    <div class="field">
                     <label>کمر</label>
-                    <input type="text"  v-model="coat.waist">
+                    <input type="text" v-model="shirt.waist" >
                     <p class="er"><span>  {{errors.get('waist')}}</span></p>
                     </div>
                     <div class="field">
-                    <label>سورین</label>
-                    <input type="text" v-model="coat.seat" >
+                        <label>سورین</label>
+                    <input type="text"  v-model="shirt.seat">
                     <p class="er"><span>  {{errors.get('seat')}}</span></p>
-                    </div>
-                    <div class="field">
-                        <label>آستین</label>
-                    <input type="text"  v-model="coat.arm_length">
-                    <p class="er"><span>  {{errors.get('arm_length')}}</span></p>
                     
                         
                     </div>
@@ -74,8 +74,8 @@
                     <div class="fields">
                             <div class="field">
                             <label>بازو</label>
-                            <input type="text" v-model="coat.arm_round">
-                            <p class="er"><span>  {{errors.get('arm_round')}}</span></p>
+                            <input type="text" v-model="shirt.shirt_arm">
+                            <p class="er"><span>  {{errors.get('shirt_arm')}}</span></p>
                             </div>
                              <div class="field">
                             <label>دیزاین یخن</label>
@@ -83,21 +83,21 @@
                                     placeholder="دیزاین یخن"
                                     selection
                                     :options="neckDesigns"
-                                    v-model="coat.neckDesign"
+                                    v-model="shirt.neckDesign"
                                 />
                                 <p class="er"><span>  {{errors.get('neckDesign')}}</span></p>
                                
                               
                             </div>
                              <div class="field">
-                            <label>دیزاین دوکمه</label>
+                            <label>دیزاین آستین</label>
                             <sui-dropdown
-                                    placeholder="دوکمه"
+                                    placeholder="دیزاین دامن"
                                     selection
-                                    :options="buttons"
-                                    v-model="coat.button"
+                                    :options="sleeveDesigns"
+                                    v-model="shirt.sleeveDesign"
                                 />
-                                <p class="er"><span>  {{errors.get('button')}}</span></p>
+                                <p class="er"><span>  {{errors.get('skirtDesign')}}</span></p>
                            
                             </div>
                         </div>
@@ -110,22 +110,12 @@
                     <div class="ui mini width form">
                     <div class="fields">
                              <div class="field">
-                            <label>چاک کرتی</label>
-                            <sui-dropdown
-                                    placeholder="چاک"
-                                    selection
-                                    :options="chaaks"
-                                    v-model="coat.chaak"
-                                /> 
-                            <p class="er"><span>  {{errors.get('chaak')}}</span></p>                       
-                            </div>
-                             <div class="field">
                             <label>دیزاین دامن</label>
                             <sui-dropdown
-                                    placeholder="دیزاین دامن"
+                                    placeholder="دیزاین سینه"
                                     selection
                                     :options="skirtDesigns"
-                                    v-model="coat.skirtDesign"
+                                    v-model="shirt.skirtDesign"
                                 /> 
                             <p class="er"><span>  {{errors.get('skirtDesign')}}</span></p>                       
                             </div>
@@ -135,9 +125,9 @@
                                     placeholder="حالت"
                                     selection
                                     :options="isCompletes"
-                                    v-model="coat.isComplete"
+                                    v-model="shirt.iscomplete"
                                 />
-                            <p class="er"><span>  {{errors.get('isComplete')}}</span></p>
+                            <p class="er"><span>  {{errors.get('iscomplete')}}</span></p>
                             </div>
                            
                         </div>
@@ -150,7 +140,7 @@
                        <label>فرمایشات</label>
                        
                         <div class="field">
-                            <textarea rows="2" v-model="coat.order"></textarea>
+                            <textarea rows="2" v-model="shirt.orders"></textarea>
                         </div>
                     </div>
                </div>
@@ -163,12 +153,12 @@
                     <div class="fields">
                             <div class="field">
                             <label>مجموع</label>
-                            <input type="text" v-model="coat.total">
+                            <input type="text" v-model="shirt.total">
                             <p class="er"><span>  {{errors.get('total')}}</span></p>
                             </div>
                             <div class="field">
                             <label>رسید</label>
-                            <input type="text" v-model="coat.received">
+                            <input type="text" v-model="shirt.received">
                             <p class="er"><span>  {{errors.get('received')}}</span></p>
                             </div>  
                             <div class="field">
@@ -182,11 +172,11 @@
 
            <div class="row" style="margin-top:15px;">
                <div class="col-md-6">
-                   <date-picker v-model="coat.start_date"   color=#3f51b5></date-picker>
+                   <date-picker v-model="shirt.start_date"   color=#3f51b5></date-picker>
                    <p class="er"><span>  {{errors.get('start_date')}}</span></p>
                </div>
                <div class="col-md-6">
-                   <date-picker v-model="coat.end_date"  color=#3f51b5></date-picker>
+                   <date-picker v-model="shirt.end_date"  color=#3f51b5></date-picker>
                    <p class="er"><span>  {{errors.get('end_date')}}</span></p>
                </div>
            </div>
@@ -237,7 +227,7 @@ class Errors{
     }
 }
 export default {
- 
+
   data () {
     return {
       
@@ -248,49 +238,40 @@ export default {
              ],
           
            neckDesigns : [
-               {text : 'هفت' , value : 1},
-               {text : 'بالا' , value : 2},
-               {text : 'آرشال' , value : 3},
+               {text : 'چپه یخن' , value : 1},
+               {text : 'پاکستانی' , value : 2},
              
            ],
           
-           skirtDesigns : [
-               {text : 'راست' , value : 1},
-               {text : 'گول'  , value : 2},
-            
+           sleeveDesigns : [
+               {text : 'ساده' , value : 1},
+               {text : 'کفدار'  , value : 2},
+             
            ],
        
-           chaaks : [
-               {text : 'بدون چاک'  , value : 1},
-               {text : 'یک چاک' , value : 2},
-               {text : 'دو چاک' , value : 3}
-           ],
-
-           buttons : [
-               {text : 'یک دوکمه ای'  , value : 1},
-               {text : 'دو دوکمه ای' , value : 2},
-               {text : 'سه دوکمه ای' , value : 3}
+           skirtDesigns : [
+               {text : 'راست'  , value : 1},
+               {text : 'گول' , value : 2}
            ],
         
        
-        coat : {
+        shirt : {
             customer_id : null,
-            coat_length : null ,
-            coat_shoulder : null ,
+            shirt_length : null ,
+            shirt_shoulder : null ,
+            sleeve : null ,
             chest : null ,
             waist : null ,
             seat : null ,
-            arm_length : null ,
-            arm_round : null ,
+            shirt_arm : null ,
             neckDesign : null ,
-            button : null,
-            chaak : null,
-            skirtDesign : null ,
-            order : null ,
+            sleeveDesign : null ,
+            skirtDesign : null , 
+            orders : null ,
             total : null ,
             received : null ,
             minus : null ,
-            isComplete : null,
+            iscomplete : null,
             start_date : null ,
             end_date : null
 
@@ -305,68 +286,62 @@ export default {
   computed : {
       min(){
          
-         return this.coat.minus = this.coat.total - this.coat.received
+         return this.shirt.minus = this.shirt.total - this.shirt.received
       },
-      lastcoat(){
-          return this.$store.getters.lastCoat;
+      lastShirt(){
+          return this.$store.getters.lastShirt;
       },
-      mycustomerId(){
+      myId(){
           return this.$store.getters.customer;
       }
-
 
   },
   components: {
             datePicker: VuePersianDatetimePicker
         },
   methods: {
-    coatMapping(){
-        this.coat.customer_id = this.mycustomerId;
+    shirtMapping(){
+        this.shirt.customer_id = this.myId;
+        this.shirt.shirt_length = this.lastShirt.shirt_length;
+        this.shirt.shirt_shoulder = this.lastShirt.shirt_shoulder;
+        this.shirt.sleeve = this.lastShirt.sleeve;
+        this.shirt.chest = this.lastShirt.chest;
+        this.shirt.waist = this.lastShirt.waist;
 
-        this.coat.coat_length = this.lastcoat.coat_length;
-        this.coat.coat_shoulder = this.lastcoat.coat_shoulder;
-        this.coat.chest = this.lastcoat.chest;
-        this.coat.waist = this.lastcoat.waist;
+        this.shirt.seat = this.lastShirt.seat;
+        this.shirt.shirt_arm = this.lastShirt.shirt_arm;
+     
 
-        this.coat.seat = this.lastcoat.seat;
-        this.coat.arm_length = this.lastcoat.arm_length;
-        this.coat.arm_round = this.lastcoat.arm_round;
-
-        this.coat.order = this.lastcoat.order;
+        this.shirt.orders = this.lastShirt.orders;
 
 
-        if(this.lastcoat.isComplete == "تحت کار"){
+        if(this.lastShirt.iscomplete == "آماده تحویل"){
            
-            this.coat.isComplete = 1;
+            this.shirt.iscomplete = 1;
            
         }else{
           
-            this.coat.isComplete = 2;
+            this.shirt.iscomplete = 2;
         }
 
 
-        
-        if(this.lastcoat.neckDesign == "هفت"){
-            this.coat.neckDesign = 1;
-        }else if (this.lastcoat.neckDesign == "بالا") {
-            this.coat.neckDesign = 2;
-        } else {
-            this.coat.neckDesign = 3;    
+        if(this.lastShirt.neckDesign == "چپه یخن"){
+
+            this.shirt.neckDesign = 1;     
         }
-        
+        else{
 
+            this.shirt.neckDesign = 2;
 
-        if(this.lastcoat.button == "یک دوکمه ای"){
+        }
 
-            this.coat.button = 1;
+        if(this.lastShirt.skirtDesign == "راست"){
 
-        }else if(this.lastcoat.button == "دو دوکمه ای"){
-
-            this.coat.button = 2;
+            this.shirt.skirtDesign = 1;
 
         }else{
 
-            this.coat.button = 3;
+            this.shirt.skirtDesign = 2;
         }
 
 
@@ -374,28 +349,13 @@ export default {
 
 
 
-        if(this.lastcoat.chaak == "بدون چاک"){
+        if(this.lastShirt.sleeveDesign == "ساده"){
 
-            this.coat.chaak = 1;
-
-        }else if(this.lastcoat.chaak == "یک چاک"){
-
-            this.coat.chaak = 2;
+            this.shirt.sleeveDesign = 1;
 
         }else{
 
-            this.coat.chaak = 3;
-        }
-
-
-
-        if(this.lastcoat.skirtDesign == "راست"){
-
-            this.coat.skirtDesign = 1;
-
-        }else{
-
-            this.coat.skirtDesign = 2;
+            this.shirt.sleeveDesign = 2;
         }
        
 
@@ -412,7 +372,7 @@ export default {
       evt.preventDefault()
           const constraints = this.getConstraints();
 
-           const errors =  validate(this.$data.coat , constraints);
+           const errors =  validate(this.$data.shirt , constraints);
       if (errors) {
         this.errors.record(errors);
                console.log(errors)
@@ -422,10 +382,10 @@ export default {
     },
     handleSubmit () {
        this.axios.defaults.headers.common["Authorization"] = 'Bearer ' + localStorage.getItem('token');
-           this.axios.post('/coat' , this.$data.coat)
+           this.axios.post('/shirts' , this.$data.shirt)
            .then((response) => {
                
-                this.$store.dispatch('getCoats');
+                this.$store.dispatch('getShirts');
                 this.$refs.modal.hide();
                 this.errors.record('');
            })
@@ -439,7 +399,7 @@ export default {
     },
      getConstraints(){
             return{
-                coat_length : {
+                shirt_length : {
                     presence : {
                         message : '^ قیمت موجود نیست'
                     },
@@ -447,13 +407,22 @@ export default {
                         message : '^قیمت مورد نظر باید عدد باشد'
                     }
                 },
-                coat_shoulder : {
+                shirt_shoulder : {
                     presence : {
                         message : '^ قیمت موجود نیست'
                     },
                      numericality: {
                         message : '^قیمت مورد نظر باید عدد باشد'
                     }
+                },
+                sleeve : {
+                     presence : {
+                        message : '^ قیمت موجود نیست'
+                    },
+                     numericality: {
+                        message : '^قیمت مورد نظر باید عدد باشد'
+                    }
+
                 },
                 chest : {
                     presence : {
@@ -479,7 +448,7 @@ export default {
                         message : '^قیمت مورد نظر باید عدد باشد'
                     }
                 },
-                arm_length : {
+                shirt_arm : {
                     presence : {
                         message : '^ قیمت موجود نیست'
                     },
@@ -487,25 +456,13 @@ export default {
                         message : '^قیمت مورد نظر باید عدد باشد'
                     }
                 },
-                arm_round : {
-                    presence : {
-                        message : '^ قیمت موجود نیست'
-                    },
-                     numericality: {
-                        message : '^قیمت مورد نظر باید عدد باشد'
-                    }
-                },
+              
                 neckDesign : {
                     presence : {
                         message : '^ قیمت موجود نیست'
                     }
                 },
-                button : {
-                    presence : {
-                        message : '^ قیمت موجود نیست'
-                    }
-                },
-                chaak : {
+                sleeveDesign : {
                     presence : {
                         message : '^ قیمت موجود نیست'
                     }
@@ -515,7 +472,7 @@ export default {
                         message : '^ قیمت موجود نیست'
                     }
                 },
-                isComplete: {
+                iscomplete: {
                     presence : {
                         message : '^ قیمت موجود نیست'
                     }
@@ -576,7 +533,6 @@ border-radius: 4px !important;
 input{
     text-align: center !important;
     border-radius: 1px !important;
-    float:left;
 }
 .vpd-wrapper {
     position: fixed;

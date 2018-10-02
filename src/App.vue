@@ -30,6 +30,10 @@ export default {
 
      @import 'assets/font/table.css';
 
+   @import 'assets/font/DroidNaskh-Regular.ttf';
+
+
+
     
 
 

@@ -41,6 +41,8 @@ const Waistcoatdetail = () => import('@/waistcoat/Detail')
 
 const Shirt = () => import('@/shirt/Shirt')
 
+const Shirtdetail = () =>  import('@/shirt/Detail')
+
 const Setting = () => import('@/setting/Setting');
 
 // Views
@@ -173,6 +175,11 @@ export default new Router({
               component : Shirt,
               name : 'shirt'
             },
+            {
+              path : '/order/:id/shirt/:shirtId',
+              component : Shirtdetail,
+              name : 'shirtdetail'
+            }
             
           ]
 

@@ -5,7 +5,7 @@
            <div class="card-header" style="height:120px;background-color:#fff;border-bottom:none">
                  <div class="row">
                           <div class="col-md-12">
-                              <h3>پتلون <span class="badge badge-primary badge-pill">{{id}}</span></h3>
+                              <h3>پیراهن وتنبان <span class="badge badge-primary badge-pill">{{id}}</span></h3>
                           </div>
                  </div>
                   <div class="row" style="margin-top:40px;">
@@ -15,25 +15,13 @@
         
           
                                     <div style="float:right">
-                                    <!-- <a  class="btn edit ng-star-inserted" style="margin-left:4px;">
+                                    <a  class="btn edit ng-star-inserted" style="margin-left:4px;">
                                         <i  class="fa fa-pencil" style="color:#fff;"></i>
                                     </a>
 
-                                    <a  class="btn delete ng-star-inserted" @click="deletePant">
+                                    <a  class="btn delete ng-star-inserted" @click="deleteShirt">
                                         <i class="fa fa-trash" style="color:#fff;"></i>
                                     </a>
-                                    <edit></edit> -->
-
-
-
-                                    <div class="row">
-                                       <div class="col-md-6" ><edit :id="id" :editpant="pant"></edit></div>
-                                       <div class="col-md-6" style="padding:0px;padding-right:2px"> 
-                                           <a  class="btn delete ng-star-inserted" @click="deletePant">
-                                            <i class="fa fa-trash" style="color:#fff;"></i>
-                                           </a>
-                                         </div>
-                                     </div>
                                     </div>
 
                                     <div style="float:left">
@@ -59,91 +47,95 @@
 
             <tbody >
               <tr >
-                <td >قد پتلون</td>
-                <td >{{pant.pant_length}} </td>
+                <td >قد</td>
+                <td >{{shirt.shirt_length }} </td>
+              </tr>
+               <tr >
+                <td >شانه</td>
+                <td >{{shirt.shirt_shoulder }} </td>
+              </tr>
+               <tr >
+                <td >آستین</td>
+                <td >{{shirt.sleeve }} </td>
+              </tr>
+               <tr >
+                <td >بغل</td>
+                <td >{{shirt.chest }} </td>
               </tr>
                <tr >
                 <td >کمر</td>
-                <td >{{pant.waist}} </td>
+                <td >{{shirt.waist }} </td>
               </tr>
                <tr >
                 <td >سورین</td>
-                <td >{{pant.seat}}  </td>
+                <td >{{shirt.seat }} </td>
               </tr>
                <tr >
-                <td >زانو</td>
-                <td >{{pant.Knee}}  </td>
+                <td >بر بازو</td>
+                <td >{{shirt.shirt_arm }} </td>
               </tr>
                <tr >
-                <td >پاچه</td>
-                <td >{{pant.cuff}}  </td>
+                <td >دیزاین یخن</td>
+                <td >{{shirt.neckDesign }} </td>
               </tr>
                <tr >
-                <td >فاق</td>
-                <td >{{pant.zepberfly}}  </td>
+                <td >دیزاین آستین</td>
+                <td >{{shirt.sleeveDesign }} </td>
               </tr>
                <tr >
-                <td >پت</td>
-                <td >{{pant.thigh}} </td>
-              </tr>
-               <tr >
-                <td >پلیت</td>
-                <td >{{pant.palet}} </td>
-              </tr>
-               <tr >
-                <td >پاچه</td>
-                <td >{{pant.pacha}}  </td>
+                <td >دیزاین دامن</td>
+                <td >{{shirt.skirtDesign }} </td>
               </tr>
                <tr >
                 <td >فرمایشات</td>
-                <td >{{pant.order}}  </td>
+                <td >{{shirt.orders }} </td>
               </tr>
              
 
              
             </tbody>
           </table></div>
-      <div class="col-md-6"><table  class="ui compact table" style="border-left:none;border-top:none;">
+      <div class="col-md-6">
+          
+          <table  class="ui compact table" style="border-top:none;border-left:none;">
             <thead style="background-color:#EEE">
               <tr>
                 <th>تاریخ/پرداخت</th>
-                <th >دیزاین</th>
+                <th >مقدار</th>
               </tr>
             </thead>
 
             <tbody >
-                 <tr >
+               <tr >
                 <td >تاریخ مراجعه</td>
-                <td >{{pant.startDate}}  </td>
+                <td >{{shirt.startDate}} </td>
               </tr>
                <tr >
                 <td >تاریخ تحویل</td>
-                <td >{{pant.endDate}}  </td>
+                <td >{{shirt.endDate}} </td>
               </tr>
                <tr >
-                <td >مجموع</td>
-                <td >{{pant.total}}  </td>
+                <td >مجمموع</td>
+                <td >{{shirt.total }} </td>
               </tr>
-               <tr >
-                <td >رسید</td>
-                <td >{{pant.received}}  </td>
+                 <tr >
+                <td >مقدار پرداخت شده</td>
+                <td >{{shirt.received }} </td>
               </tr>
+              
+            
                <tr >
                 <td >باقی</td>
-                <td >{{pant.minus}}  </td>
+                <td >{{shirt.minus}} </td>
               </tr>
-               <tr >
-                <td >حالت</td>
-                <td > <span class="badge badge-primary badge-pill" style="padding:5px;">{{pant.isComplete}}</span> </td>
-              </tr>
-             
+              
+               
+               
              
 
              
             </tbody>
           </table>
-          
-         
           
           </div>
     </div>
@@ -154,50 +146,48 @@
    </div>
 </template>
 <script>
-import Edit from './Editpant'
 export default {
     data(){
       return{
-        id : this.$route.params.pantId
+        id : this.$route.params.shirtId
       }
 
     },
     computed : {
-      pant(){
-        return this.$store.getters.mySelectedPant;
-      },
-      customerProfile(){
-        return this.$store.getters.customer;
-      }
+        shirt(){
+            return this.$store.getters.mySelectedShirt;
+        },
+        customerProfile(){
+          return this.$store.getters.customer;
+        }
       
     },
     created(){
-      this.$store.commit("comSelectedPantId" , this.id);
+
+        this.$store.commit("comSelectedShirtId" , this.id);
+
     },
     mounted(){
-      this.axios.defaults.headers.common["Authorization"] = 'Bearer ' + localStorage.getItem('token');
-
-      this.$store.dispatch('getSelectedPant');
-    },
-    components : {
-      edit : Edit
-    },
-    methods : {
-      deletePant(){
-         this.axios.defaults.headers.common["Authorization"] = 'Bearer ' + localStorage.getItem('token');
-            this.axios.delete('/pants/' + this.id)
+        this.axios.defaults.headers.common["Authorization"] = 'Bearer ' + localStorage.getItem('token');
+        this.$store.dispatch('getSelectedShirt');
+   },
+   methods : {
+     deleteShirt(){
+        this.axios.defaults.headers.common["Authorization"] = 'Bearer ' + localStorage.getItem('token');
+            this.axios.delete('/shirts/' + this.id)
             .then((response) => {
 
             
               console.log("deleted Successfully");
-              this.$router.push('/order/' + this.customerProfile + '/pant' );
+              this.$router.push('/order/' + this.customerProfile + '/shirt' );
             
             })
             .catch((error) => {
               console.log(error);
             })
-      }
-    }
+
+     }
+   }
 }
 </script>
 <style>

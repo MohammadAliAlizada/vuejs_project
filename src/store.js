@@ -53,8 +53,14 @@ export const store = new Vuex.Store({
       pantPagination : [],
       lastPant : [],
       SelectedPantId : '',
-      mySelectedPant : []
-      
+      mySelectedPant : [],
+
+    // this is shirt part
+      shirts : [] ,
+      shirtPagination : [],
+      lastShirt : [],
+      SelectedShirtId : '',
+      mySelectedShirt : []
 
 
     
@@ -147,6 +153,22 @@ export const store = new Vuex.Store({
         },
         mySelectedPant(state){
             return state.mySelectedPant;
+        },
+        // shirt part getters
+        shirts(state){
+            return state.shirts;
+        },
+        shirtPagination(state){
+            return state.shirtPagination;
+        },
+        lastShirt(state){
+            return state.lastShirt;
+        },
+        SelectedShirtId(state){
+            return state.SelectedShirtId;
+        },
+        mySelectedShirt(state){
+            return state.mySelectedShirt;
         }
 
        
@@ -251,7 +273,24 @@ export const store = new Vuex.Store({
        },
        SelectedPant(state ,payload){
            state.mySelectedPant = payload;
-       }
+       },
+    // shirt part Mutation
+
+      updateShirt(state , payload){
+          state.shirts = payload;
+      },
+      updateShirtPagination(state , payload){
+          state.shirtPagination = payload;
+      },
+      updateLastShirt(state , payload){
+          state.lastShirt = payload;
+      },
+      comSelectedShirtId(state , payload){
+          state.SelectedShirtId = payload;
+      },
+      SelectedShirt(state , payload){
+          state.mySelectedShirt = payload;
+      }
 
       
 
@@ -397,7 +436,46 @@ export const store = new Vuex.Store({
                 .catch((error) => {
                     console.log(error);
                 })
+        },
+        // This is the shirt part
+
+        getShirts(context){
+            axios.get('/customers/'+ this.state.customer + '? include=shirt'  )
+            .then((response) => {
+                
+                
+                context.commit("updateShirt" ,response.data.data.shirt.data );
+           
+                context.commit("updateShirtPagination" , response.data.data.shirt.meta.pagination)
+                console.log(response.data.data.shirt.data);
+                 console.log(response.data.data.shirt.meta.pagination);
+
+                if (response.data.data.shirt.data.length > 0) {
+                    
+                    console.log(response.data.data.shirt.data[0]);
+                    context.commit("updateLastShirt" , response.data.data.shirt.data[0]);
+                }
+              
+    
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        },
+        getSelectedShirt(context){
+            axios.get('/shirts/' + this.state.SelectedShirtId)
+            .then((response) => {
+
+                console.log(response.data.data);
+
+                context.commit('SelectedShirt' , response.data.data);
+            
+            })
+            .catch((error) => {
+                console.log(error);
+            })
         }
+
 
        
 

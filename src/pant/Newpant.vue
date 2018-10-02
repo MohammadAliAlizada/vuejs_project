@@ -278,6 +278,9 @@ export default {
       },
       lastpant(){
           return this.$store.getters.lastPant;
+      },
+      myId(){
+          return this.$store.getters.customer;
       }
 
   },
@@ -286,7 +289,7 @@ export default {
         },
   methods: {
     pantMapping(){
-        this.pant.customer_id = this.lastpant.customer_id;
+        this.pant.customer_id = this.myId;
         this.pant.pant_length = this.lastpant.pant_length;
         this.pant.waist = this.lastpant.waist;
         this.pant.seat = this.lastpant.seat;
